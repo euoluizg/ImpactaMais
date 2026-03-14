@@ -1,8 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login-page',
-  imports: [],
+  standalone: true,
+  imports: [
+    FormsModule,
+    CommonModule
+    
+  ],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss',
 })

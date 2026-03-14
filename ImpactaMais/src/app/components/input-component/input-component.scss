@@ -1,0 +1,23 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .custom-field {
+    padding: 12px 16px;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:focus {
+      filter: brightness(0.95);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+  }
+
+  label {
+    font-weight: 600;
+    margin-left: 5px;
+  }
+}
