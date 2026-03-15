@@ -1,17 +1,11 @@
-<div class="inputContainer" [style.width]="width">
-  <label *ngIf="label" [style.color]="textColor" [style.fontSize]="'14px'">{{ label }}</label>
-  
-  <input 
-    [type]="type"
-    [value]="value"
-    (input)="updateValue($any($event.target).value)"
-    (blur)="onTouched()"
-    [style.backgroundColor]="backgroundColor"
-    [style.color]="textColor"
-    [style.fontSize]="fontSize"
-    [style.borderRadius]="borderRadius"
-    [style.border]="'1px solid ' + textColor"
-    class="customField"
-    placeholder=" "
-  />
+<div class="input-wrapper">
+    <label for="inputName"> {{ label }}</label>
+    <div class="input-content">
+        <input 
+        [type]="type" 
+        [placeholder]="placeholder" 
+        [value]="value"
+        (input)="onInput($event)"
+    />
+    </div>
 </div>

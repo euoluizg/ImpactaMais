@@ -4,9 +4,13 @@ import { ContatoPage } from './pages/contato-page/contato-page';
 
 export const routes: Routes = [
     {
-        path: 'login', component: LoginPage
+        path: 'login', 
+        component: LoginPage,
+        title: 'ImpactaMais • Login'
     },
     {
-        path: 'contato', component: ContatoPage
+        path: 'contato', 
+        component: ContatoPage,
+        title: 'ImpactaMais • Contato'
     }
 ];
