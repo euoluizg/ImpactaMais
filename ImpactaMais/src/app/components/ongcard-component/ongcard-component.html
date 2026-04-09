@@ -1,0 +1,43 @@
+<div class="card-container">
+  <div class="header">
+    <div class="avatar-box">
+      <img [src]="data.avatarUrl" [alt]="data.nomeOng" />
+    </div>
+    <div class="header-text">
+      <span class="nome">{{ data.nomeOng }}</span>
+      <span class="causa">{{ data.causa }}</span>
+    </div>
+    <div class="badge-verificado" *ngIf="data.verificada">
+        <icon name="solar:shield-check-bold" color="#fff" size="10"></icon><span>Verificado</span>
+    </div>
+  </div>
+
+  <div class="capa" [style.background-image]="'url(' + data.imagemCapa + ')'">
+    <div class="badge-destaque" *ngIf="data.destaque">Destaque</div>
+  </div>
+
+  <div class="content">
+    <div class="stats">
+      <span>Voluntários: {{ data.voluntariosCount }}</span>
+      <span>Doações: {{ data.doacaoPercent }}%</span>
+    </div>
+
+    <h3 class="titulo">{{ data.tituloCampanha }}</h3>
+    <p class="descricao">{{ data.descricao }}</p>
+
+    <div class="footer-info">
+      <span>{{ getIconeCategoria(data.categoriaTag) }} {{ data.categoriaTag }}</span>
+      <span><icon name="solar:map-point-bold" color="#181818" size="10"></icon> {{ data.localizacao }}</span>
+    </div>
+
+    <button-component
+      label="Quero Ajudar"
+      width="190px"
+      fontSize="12px"
+      borderRadius="25px"
+      padding="2px 0px"
+      fontWeight="500"
+      (action)="clicouAjudar()"
+    ></button-component>
+  </div>
+</div>

@@ -1,30 +1,40 @@
-.input-wrapper{
+.input-wrapper {
     color: #333;
     font-size: 16px;
     text-align: start;
+    display: flex;
+    flex-direction: column;
 
-    label{
-        margin-bottom: 10px;
+    label {
+        margin-bottom: 8px;
+        font-weight: 500;
     }
 
-    .input-content{
+    .input-content {
         width: 100%;
         border-radius: 8px;
         display: flex;
-        align-items: stretch;
-        border: 1px solid #333;
+        border: 1px solid #ccc; 
+        overflow: hidden;
 
-        input {
+        .base-field {
             border: none;
-            border-radius: 8px;
             background-color: #f0f0f0;
-            padding: 12px 0 12px 20px;
+            padding: 12px 20px;
             width: 100%;
             outline: none;
+            font-family: inherit;
+            font-size: 16px;
+            transition: background-color 0.2s;
 
-            &:focus{
-              background-color: #e8e8e8;
+            &:focus {
+                background-color: #e8e8e8;
             }
+        }
+
+        textarea.base-field {
+            min-height: 100px;
+            resize: vertical; 
         }
     }
 }

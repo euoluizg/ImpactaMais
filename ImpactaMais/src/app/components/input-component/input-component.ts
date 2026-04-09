@@ -29,7 +29,14 @@ export class InputComponent implements ControlValueAccessor {
   onTouched: any = () => {}
 
   onInput(event: Event){
-    const newValue = (event.target as HTMLInputElement).value;
+    const target = event.target as HTMLInputElement | HTMLTextAreaElement;
+    let newValue = target.value;
+
+    if (this.type === 'tel' || this.type === 'number') {
+    newValue = newValue.replace(/\D/g, ''); 
+    target.value = newValue; 
+  }
+
     this.value = newValue;
     this.onChage(newValue);
   }

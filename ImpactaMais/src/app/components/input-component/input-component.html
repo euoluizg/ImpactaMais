@@ -1,11 +1,26 @@
 <div class="input-wrapper">
-    <label for="inputName"> {{ label }}</label>
+    @if (label) {
+        <label [for]="inputName"> {{ label }}</label>
+    }
     <div class="input-content">
-        <input 
-        [type]="type" 
-        [placeholder]="placeholder" 
-        [value]="value"
-        (input)="onInput($event)"
-    />
+        @if (type === 'textarea') {
+            <textarea
+                [id]="inputName"
+                [placeholder]="placeholder"
+                [value]="value"
+                (input)="onInput($event)"
+                rows="4"
+                class="base-field"
+            ></textarea>
+        } @else {
+            <input 
+                [id]="inputName"
+                [type]="type" 
+                [placeholder]="placeholder" 
+                [value]="value"
+                (input)="onInput($event)"
+                class="base-field"
+            />
+        }
     </div>
 </div>

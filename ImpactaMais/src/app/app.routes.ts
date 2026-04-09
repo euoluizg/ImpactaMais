@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { LoginPage } from './pages/login-page/login-page';
-import { ContatoPage } from './pages/contato-page/contato-page';
+import { HomePage } from './pages/home-page/home-page';
 
 export const routes: Routes = [
     {
@@ -9,8 +9,8 @@ export const routes: Routes = [
         title: 'ImpactaMais • Login'
     },
     {
-        path: 'contato', 
-        component: ContatoPage,
-        title: 'ImpactaMais • Contato'
+        path: '', 
+        component: HomePage,
+        title: 'ImpactaMais • Home'
     }
 ];

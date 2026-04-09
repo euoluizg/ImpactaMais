@@ -1,0 +1,21 @@
+.butt-wrapper {
+  display: inline-block; 
+  width: auto;           
+
+  .btn {
+    border: none; 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 0.2s ease;
+
+    &:hover {
+      filter: brightness(0.9); 
+    }
+
+    &:active {
+      transform: scale(0.98); 
+    }
+  }
+}

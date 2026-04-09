@@ -1,0 +1,77 @@
+<div class="container">
+    <navbar-component></navbar-component>
+
+    <section id="destaqueSection">
+        <div class="section-title">
+            <h1 class="title1">Encontre sua Causa.</h1>
+            <h1 class="title2">Mude Vidas.</h1>
+            <p>O ImpactaMais conecta você às causas que você ama. Descubra e apoie projetos sociais locais em Maceió e região.</p>
+        </div>
+        
+        <div class="cards-grid">
+            <ongcard-component 
+                *ngFor="let ongItem of listaOngs" 
+                [data]="ongItem"
+                (onAjudar)="processarCliqueAjudar($event)">
+            </ongcard-component>
+        </div>
+    </section>
+
+    <section id="info">
+        <div class="info">
+            <h1>Fale Conosco</h1>
+            <p class="subtitleInfo">Pelo canal de atendimento ao cliente estamos disponíveis para ajudar!</p>
+            <h3>Nossos Contatos:</h3>
+            <p class="contactInfo">📱 (82) 99999-9999</p>
+            <p class="contactInfo">📞 (82) 3333-3333</p>
+            <p class="contactInfo">✉️ contato@impactamais.com.br</p>
+        </div>
+        <div class="form">
+            <h1>Preencha o formulário</h1>
+            <form [formGroup]="contatoForm">
+                <div class="formRow">
+                <InputComponent 
+                    formControlName="nome"
+                    inputName="nome"
+                    type="text"
+                    label="Nome"
+                    placeholder="João da Silva"
+                />
+                <InputComponent 
+                    formControlName="telefone"
+                    inputName="telefone"
+                    type="tel"
+                    label="Telefone"
+                    placeholder="(00) 00000-0000"
+                />
+                </div>
+                <div class="email">
+                    <InputComponent
+                    formControlName="email"
+                    inputName="email"
+                    type="email"
+                    label="Email"
+                    placeholder="joao@silva.com"
+                    />
+                </div>
+                <div class="message">
+                    <InputComponent
+                    formControlName="mensagem"
+                    inputName="mensagem"
+                    type="textarea"
+                    label="Mensagem"
+                    placeholder="Digite sua mensagem"
+                    />
+                </div>
+                <button-component
+                    label="Enviar"
+                    width="560px"
+                    fontSize="18px"
+                    borderRadius="25px"
+                    (action)="onSubmit()"
+                ></button-component>
+            </form>
+        </div>
+    </section>
+    <footer1Component></footer1Component>
+</div>
