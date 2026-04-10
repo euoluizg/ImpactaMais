@@ -72,8 +72,8 @@ navbar-component, footer1Component {
     }
 
     .remember-forgot {
+        display: flex;
         justify-content: space-between;
-        align-items: center;
         font-size: 14px;
         color: #181818;
         margin-top: -5px;
@@ -88,11 +88,11 @@ navbar-component, footer1Component {
         a {
             color: #12678d;
             text-decoration: underline;
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: 500;
+            font-size: 15px;
             cursor: pointer;
 
-            &::before{
+            &:before{
                 content: '';
                 display: inline-block;
                 border-radius: 50%;
@@ -100,6 +100,10 @@ navbar-component, footer1Component {
             }
             
             &:hover { 
+                color: #12678d;
+            }
+
+            &:active {
                 color: #12678d;
             }
         }

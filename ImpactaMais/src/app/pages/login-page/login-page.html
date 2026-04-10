@@ -18,24 +18,24 @@
         label="Senha"
         placeholder="Digite sua senha"
       ></InputComponent>
-      <div class="rememberFogort">
+      <div class="remember-forgot">
         <checkbox-component
           label="Lembrar-me"
           activeColor="#12678D"
           size="15px"
         ></checkbox-component>
-        <a routerLink="/enviar-codigo">Esqueci minha senha</a>
+        <a routerLink="/enviar-codigo">Esqueceu sua senha?</a>
       </div>
       <button-component
         label="Entrar"
-        width="560px"
+        width="520px"
         fontSize="24px"
         borderRadius="25px"
         (action)="onLogin()"
       ></button-component>
       <button-component
         label="Criar conta"
-        width="560px"
+        width="520px"
         fontSize="24px"
         borderRadius="25px"
         (action)="goSignUp()"
