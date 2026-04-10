@@ -18,13 +18,13 @@
         label="Senha"
         placeholder="Digite sua senha"
       ></InputComponent>
-      <div class="remember-forgot">
-        <checkbox-component
-          label="Lembrar-me"
-          activeColor="#12678D"
-          size="15px"
-        ></checkbox-component>
-        <a routerLink="/enviar-codigo">Esqueceu sua senha?</a>
+      <div class="rememberFogort">
+        <div class="checkbox-wrapper">
+          <input type="checkbox" formControlName="rememberMe" id="rememberMe">
+          <label for="rememberMe">Lembrar-me</label>
+        </div>
+        
+        <a routerLink="/enviar-codigo">Esqueci minha senha</a>
       </div>
       <button-component
         label="Entrar"

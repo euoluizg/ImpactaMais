@@ -6,7 +6,6 @@ import { NavbarComponent } from '../../components/navbar-component/navbar-compon
 import { InputComponent } from '../../components/input-component/input-component';
 import { ButtonComponent } from '../../components/button-component/button-component';
 import { Router, RouterModule } from '@angular/router';
-import { CheckboxComponent } from '../../components/checkbox-component/checkbox-component';
 
 interface LoginFormModel {
   email: FormControl;
@@ -24,11 +23,10 @@ interface LoginFormModel {
     NavbarComponent,
     Footer1Component,
     InputComponent,
-    ButtonComponent,
-    CheckboxComponent
+    ButtonComponent
 ],
   templateUrl: './login-page.html',
-  styleUrl: './login-page.scss',
+  styleUrl: './login-page.scss'
 })
 export class LoginPage {
   router = inject(Router);
