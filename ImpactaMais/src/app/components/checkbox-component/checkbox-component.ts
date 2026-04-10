@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'checkbox-component',
@@ -12,6 +12,8 @@ export class CheckboxComponent {
   @Input() label: string = '';
   @Input() activeColor: string = '#12678D';
   @Input() size: string = '';
+  @Input() active: boolean = false;
+  @Output() change = new EventEmitter<boolean>();
 
   value: boolean = false;
   onChange: any = () => {};

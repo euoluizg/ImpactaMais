@@ -1,1 +1,70 @@
-<p>signup-page works!</p>
+<div class="container">
+  <navbar-component></navbar-component>
+  <div class="form-container">
+    <h1>Acesse sua Conta</h1>
+    <form [formGroup]="signupForm">
+      <InputComponent
+        formControlName="nome"
+        inputName="nome"
+        type="text"
+        label="Nome"
+        placeholder="Digite seu nome"
+        width="600px"
+      ></InputComponent>
+      <InputComponent
+        formControlName="email"
+        inputName="email"
+        type="email"
+        label="Email"
+        placeholder="Digite seu email"
+        width="600px"
+      ></InputComponent>
+      <InputComponent
+        formControlName="senha"
+        inputName="senha"
+        type="password"
+        label="Senha"
+        placeholder="Digite sua senha"
+      ></InputComponent>
+      <InputComponent
+        formControlName="confirmSenha"
+        inputName="confirmSenha"
+        type="password"
+        label="Confirmar Senha"
+        placeholder="Digite sua senha novamente"
+        width="600px"
+      ></InputComponent>
+      <div class="termos-container">
+        <checkbox-component
+          label="Li e concordo com os termos de"
+          activeColor="#12678D"
+          size="15px"
+          [active]="signupForm.get('termos')?.value"
+          (change)="signupForm.get('termos')?.setValue($event)">
+        </checkbox-component>
+        
+        <a routerLink="/termos" class="termos"
+          >Política de Privacidade<span class="dotTerm">.</span></a
+        >
+      </div>
+      <div
+        *ngIf="signupForm.hasError('senhasDiferentes') && signupForm.get('confirmSenha')?.touched"
+        style="color: red; font-size: 14px; margin-top: -10px; margin-bottom: 15px"
+      >
+        As senhas não coincidem.
+      </div>
+      <button-component
+        label="Criar conta"
+        width="520px"
+        fontSize="24px"
+        borderRadius="25px"
+        (action)="onSignUp()"
+      ></button-component>
+      <div class="backLogin-container">
+        <span class="backLogin">Voltar para </span>
+        <a routerLink="/login" class="backToLogin">Login</a>
+      </div>
+    </form>
+  </div>
+  <footer1Component></footer1Component>
+</div>
