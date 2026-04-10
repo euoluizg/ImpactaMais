@@ -1,5 +1,49 @@
 <div class="container">
-    <navbar-component></navbar-component>
-
-    <footer1Component></footer1Component>
+  <navbar-component></navbar-component>
+  <div class="form-container">
+    <h1>Acesse sua Conta</h1>
+    <form [formGroup]="loginForm">
+      <InputComponent
+        formControlName="email"
+        inputName="email"
+        type="email"
+        label="Email"
+        placeholder="Digite seu email"
+        width="600px"
+      ></InputComponent>
+      <InputComponent
+        formControlName="senha"
+        inputName="senha"
+        type="password"
+        label="Senha"
+        placeholder="Digite sua senha"
+      ></InputComponent>
+      <div class="remember-forgot">
+        <checkbox-component
+          label="Lembrar-me"
+          activeColor="#12678D"
+          size="15px"
+        ></checkbox-component>
+        <a routerLink="/enviar-codigo">Esqueceu sua senha?</a>
+      </div>
+      <button-component
+        label="Entrar"
+        width="520px"
+        fontSize="24px"
+        borderRadius="25px"
+        (action)="onLogin()"
+      ></button-component>
+      <button-component
+        label="Criar conta"
+        width="520px"
+        fontSize="24px"
+        borderRadius="25px"
+        (action)="goSignUp()"
+        backgroundColor="#fff"
+        textColor="#12678d"
+        border="2px solid #12678d"
+      ></button-component>
+    </form>
+  </div>
+  <footer1Component></footer1Component>
 </div>

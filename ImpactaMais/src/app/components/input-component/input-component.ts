@@ -5,6 +5,7 @@ type InputTypes = "text" | "email" | "password" | "number" | "tel" | "url" | "se
 
 @Component({
   selector: 'InputComponent',
+  standalone: true,
   imports: [
     ReactiveFormsModule
   ],
@@ -25,7 +26,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() inputName: string = "";
 
   value: string = ''
-  onChage: any = () => {}
+  onChange: any = () => {}
   onTouched: any = () => {}
 
   onInput(event: Event){
@@ -38,7 +39,7 @@ export class InputComponent implements ControlValueAccessor {
   }
 
     this.value = newValue;
-    this.onChage(newValue);
+    this.onChange(newValue);
   }
 
   writeValue(value: any): void {
@@ -46,7 +47,7 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   registerOnChange(fn: any): void {
-      this.onChage = fn;
+      this.onChange = fn;
   }
 
   registerOnTouched(fn: any): void {
