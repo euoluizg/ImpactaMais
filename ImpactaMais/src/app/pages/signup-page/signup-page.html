@@ -1,7 +1,7 @@
 <div class="container">
   <navbar-component></navbar-component>
   <div class="form-container">
-    <h1>Acesse sua Conta</h1>
+    <h1>Crie sua Conta</h1>
     <form [formGroup]="signupForm">
       <InputComponent
         formControlName="nome"
@@ -35,17 +35,12 @@
         width="600px"
       ></InputComponent>
       <div class="termos-container">
-        <checkbox-component
-          label="Li e concordo com os termos de"
-          activeColor="#12678D"
-          size="15px"
-          [active]="signupForm.get('termos')?.value"
-          (change)="signupForm.get('termos')?.setValue($event)">
-        </checkbox-component>
+        <input type="checkbox" formControlName="termos" id="termos">
         
-        <a routerLink="/termos" class="termos"
-          >Política de Privacidade<span class="dotTerm">.</span></a
-        >
+        <label for="termos">
+          Li e concordo com os termos de 
+          <a routerLink="/termos" class="link-termos">Política de Privacidade<span class="dotTerm">.</span></a>
+        </label>
       </div>
       <div
         *ngIf="signupForm.hasError('senhasDiferentes') && signupForm.get('confirmSenha')?.touched"
