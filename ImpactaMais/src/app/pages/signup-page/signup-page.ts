@@ -61,22 +61,12 @@ export class SignupPage {
     });
   }
 
-  // onSignUp() {
-  //   if (this.signupForm.valid) {
-  //     // Lógica de cadastro aqui
-  //     console.log('Cadastro bem-sucedido!');
-  //   } else {
-  //     console.log('Formulário inválido. Por favor, preencha corretamente.');
-  //     this.signupForm.markAllAsTouched();
-  //   }
-  // }
-
   onSignUp() {
-    // Agora o if(this.signupForm.valid) funciona com 100% de perfeição e sozinho!
     if (this.signupForm.valid) {
-      console.log('Cadastro bem-sucedido! Tudo validado.');
+      // Lógica de cadastro aqui
+      console.log('Cadastro bem-sucedido!');
     } else {
-      console.log('Formulário inválido. Aceite os termos e verifique os campos.');
+      console.log('Formulário inválido. Por favor, preencha corretamente.');
       this.signupForm.markAllAsTouched();
     }
   }
