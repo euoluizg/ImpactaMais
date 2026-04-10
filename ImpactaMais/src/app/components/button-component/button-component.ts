@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'button-component',
+  standalone: true,
   imports: [],
   templateUrl: './button-component.html',
   styleUrl: './button-component.scss',
@@ -15,6 +16,7 @@ export class ButtonComponent {
   @Input() width: string = 'auto';
   @Input() padding: string = '12px 24px';
   @Input() fontWeight: string = '700';
+  @Input() border: string = 'none';
 
   @Output() action = new EventEmitter<void>();
 }

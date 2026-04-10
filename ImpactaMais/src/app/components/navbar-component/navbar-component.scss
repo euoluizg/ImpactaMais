@@ -3,35 +3,60 @@
     padding: 0;
 }
 
+/* --- TOPO RESPONSIVO --- */
 .topo{
     background-color: #12678d;
     color: white;
-    padding: 5px 100px; 
+    /* No celular, padding menor e texto centralizado */
+    padding: 8px 20px; 
     display: flex;
     align-items: center;
+    justify-content: center; 
+    font-size: 14px;
+    text-align: center;
+
+    /* No Desktop, volta ao original */
+    @media (min-width: 992px) {
+        padding: 5px 100px;
+        justify-content: flex-start; /* Alinha à esquerda */
+        font-size: 16px;
+    }
 }
 
+/* --- NAVBAR RESPONSIVA --- */
 .navBar{
-    padding: 0 100px; 
+    /* Celular: padding reduzido, altura automática para não cortar conteúdo */
+    padding: 15px 20px; 
     display: flex;
-    height: 90px;
-    gap: 20px;
+    flex-wrap: wrap; /* Permite empilhar Logo e Menu se faltar espaço */
+    min-height: 90px;
+    height: auto;
+    gap: 15px;
     background-color: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     
-    justify-content: space-between; 
+    justify-content: center; /* Centraliza tudo no mobile */
     align-items: center;            
     
     color: #12678d;
     font-weight: 800;
     font-size: 16px;
 
+    /* Controle da logo para não quebrar a tela em celulares pequenos */
+    img {
+        max-width: 160px;
+        height: auto;
+    }
+
     ul{
         list-style: none;
         display: flex;
         align-items: center;       
-        gap: 30px;                 
+        justify-content: center;
+        flex-wrap: wrap; /* Os links também quebram linha se necessário */
+        gap: 15px; /* Espaço menor entre links no celular */                 
         text-align: center;
+        width: 100%; /* Empurra a logo para cima e os links para baixo */
     }
 
     li{
@@ -47,6 +72,7 @@
         padding: 5px 0; 
     }
 
+    /* Seu efeito de sublinhado maravilhoso continua intacto */
     a::after {
         content: '';
         position: absolute;
@@ -66,5 +92,22 @@
         transform-origin: left;
         transform: scaleX(1);
         cursor: pointer;
+    }
+
+    /* --- REGRAS PARA DESKTOP --- */
+    @media (min-width: 992px) {
+        padding: 0 100px; /* Volta o padding grandão */
+        height: 90px;
+        justify-content: space-between; /* Logo na esquerda, menu na direita */
+        flex-wrap: nowrap; /* Trava tudo na mesma linha */
+
+        img {
+            max-width: 200px; /* Permite a logo ficar maior */
+        }
+
+        ul {
+            width: auto; /* Tira o 100% de largura */
+            gap: 30px; /* Volta o respiro original entre os itens */
+        }
     }
 }
