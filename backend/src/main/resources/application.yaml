@@ -3,13 +3,15 @@ spring:
     name: backend
 
   datasource:
-    url: jdbc:postgresql://dpg-d7dqatpkh4rs739v7ngg-a.oregon-postgres.render.com:5432/impactamaisdb
-    username: impactamaisdb_user
-    password: AEq165jA3nLKwzrh5CupgSOTELwb9MzO
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/impactamais}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:admin}
   
   jpa:
     hibernate:
-      ddl-auto: validate
+      # DICA: Use 'update' no primeiro deploy para o Render criar as tabelas! 
+      # Depois você pode voltar para 'validate'.
+      ddl-auto: ${SPRING_JPA_DDL_AUTO:update}
     show-sql: true
     properties:
       hibernate:
@@ -18,8 +20,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: contact.impactamais@gmail.com
-    password: gltn nbvc axmq yltb
+    username: ${SPRING_MAIL_USERNAME:contact.impactamais@gmail.com}
+    password: ${SPRING_MAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -29,12 +31,12 @@ spring:
             required: true
 
   rabbitmq:
-    host: jackal.rmq.cloudamqp.com
+    host: ${SPRING_RABBITMQ_HOST:localhost}
     port: 5672
-    username: pifpvqnw
-    password: MNRE0Pg2t6iBjnJOLRWNuWrCKl3Bo9a4
-    virtual-host: pifpvqnw
+    username: ${SPRING_RABBITMQ_USERNAME:guest}
+    password: ${SPRING_RABBITMQ_PASSWORD:guest}
+    virtual-host: ${SPRING_RABBITMQ_VHOST:/}
 
 jwt:
-  secret: 4a7d1ed414474e4033ac29ccb8653d9b18360d091f143714b2d3580424564c89
+  secret: ${JWT_SECRET:4a7d1ed414474e4033ac29ccb8653d9b18360d091f143714b2d3580424564c89}
   expiration: 86400000
