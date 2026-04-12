@@ -8,6 +8,7 @@ spring:
     password: ${SPRING_DATASOURCE_PASSWORD:admin}
   
   jpa:
+    open-in-view: false
     hibernate:
       # DICA: Use 'update' no primeiro deploy para o Render criar as tabelas! 
       # Depois você pode voltar para 'validate'.
