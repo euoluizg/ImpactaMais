@@ -22,7 +22,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: ${SPRING_MAIL_USERNAME:contact.impactamais@gmail.com}
-    password: ${SPRING_MAIL_PASSWORD}
+    password: ${SPRING_MAIL_PASSWORD:gltn nbvc axmq yltb}
     properties:
       mail:
         smtp:
@@ -32,11 +32,11 @@ spring:
             required: true
 
   rabbitmq:
-    host: ${SPRING_RABBITMQ_HOST:localhost}
+    host: ${SPRING_RABBITMQ_HOST:jackal.rmq.cloudamqp.com}
     port: 5672
-    username: ${SPRING_RABBITMQ_USERNAME:guest}
-    password: ${SPRING_RABBITMQ_PASSWORD:guest}
-    virtual-host: ${SPRING_RABBITMQ_VHOST:/}
+    username: ${SPRING_RABBITMQ_USERNAME:pifpvqnw}
+    password: ${SPRING_RABBITMQ_PASSWORD:MNRE0Pg2t6iBjnJOLRWNuWrCKl3Bo9a4}
+    virtual-host: ${SPRING_RABBITMQ_VHOST:pifpvqnw}
 
 jwt:
   secret: ${JWT_SECRET:4a7d1ed414474e4033ac29ccb8653d9b18360d091f143714b2d3580424564c89}

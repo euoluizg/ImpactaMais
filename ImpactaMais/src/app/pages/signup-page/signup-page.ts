@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/AuthService';
+import Swal from 'sweetalert2';
 
 export function senhasIguaisValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -46,10 +47,12 @@ interface SignupFormModel {
   styleUrl: './signup-page.scss',
 })
 export class SignupPage {
+  isSubmitting = false;
+
   router = inject(Router);
   auth = inject(AuthService);
 
-  signupForm! : FormGroup<SignupFormModel>;
+  signupForm!: FormGroup<SignupFormModel>;
 
   constructor() {
     this.signupForm = new FormGroup({
@@ -59,32 +62,120 @@ export class SignupPage {
       confirmSenha: new FormControl('', [Validators.required]),
       termos: new FormControl(false, [Validators.requiredTrue]),
     },
-    { 
-      validators: senhasIguaisValidator() 
-    });
+      {
+        validators: senhasIguaisValidator()
+      });
   }
 
   onSignUp() {
-    if (this.signupForm.valid) {
-      const { nome, email, senha } = this.signupForm.value;
-      const payload = { nome, email, senha };
+    if (this.isSubmitting) return;
 
-      console.log('Enviando dados para o Render...', payload);
+    if (this.signupForm.valid) {
+      this.isSubmitting = true;
+      
+      const { nome, email, senha, termos } = this.signupForm.value;
+      const payload = { 
+        username: nome, 
+        email: email, 
+        senha: senha,
+        termosAceitos: termos 
+      };
+
+      Swal.fire({
+        title: 'Enviando...',
+        text: 'Aguarde enquanto criamos sua conta.',
+        allowOutsideClick: false,
+        didOpen: () => { Swal.showLoading(); }
+      });
 
       this.auth.cadastrarUsuario(payload).subscribe({
-        next: (response) => {
-          console.log('✅ Cadastro salvo no banco de dados!', response);
-          alert('Cadastro realizado com sucesso! Verifique seu e-mail.');
+        next: (response: any) => {
+          this.isSubmitting = false;
+          Swal.close();
+          this.abrirModalDeConfirmacao(email!);
         },
-        error: (error) => {
-          // O Backend recusou (ex: e-mail já existe, erro de CORS, etc)
-          console.error('❌ Erro de comunicação com a API:', error);
-          alert('Houve um erro ao processar seu cadastro. Veja o console F12.');
+        error: (erro: any) => {
+          this.isSubmitting = false;
+          console.error('O VERDADEIRO ERRO É:', erro);
+          
+          let mensagemReal = 'Houve um erro de comunicação com o servidor.';
+          
+          if (typeof erro.error === 'string') {
+            mensagemReal = erro.error;
+          } else if (erro.error && erro.error.message) {
+            mensagemReal = erro.error.message;
+          } else if (erro.message) {
+             mensagemReal = erro.message;
+          }
+
+          Swal.fire('Ops!', mensagemReal, 'error');
         }
       });
+
     } else {
-      console.log('Formulário inválido. Por favor, preencha corretamente.');
+      
       this.signupForm.markAllAsTouched();
+
+      if (this.signupForm.get('termos')?.invalid) {
+        Swal.fire({
+          title: 'Atenção!',
+          text: 'Você precisa aceitar a Política de Privacidade para criar uma conta.',
+          icon: 'warning',
+          confirmButtonText: 'Entendi'
+        });
+      } else {
+        Swal.fire({
+          title: 'Campos Incompletos',
+          text: 'Por favor, preencha todos os campos obrigatórios corretamente.',
+          icon: 'warning',
+          confirmButtonText: 'Ok'
+        });
+      }
     }
+  }
+
+  abrirModalDeConfirmacao(email: string) {
+    Swal.fire({
+      title: 'Verifique seu e-mail!',
+      text: `Enviamos um código de 6 dígitos para ${email}`,
+      input: 'text',
+      inputPlaceholder: 'Digite o código aqui',
+      inputAttributes: {
+        maxlength: '6',
+        autocapitalize: 'off',
+        autocorrect: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Validar Conta',
+      cancelButtonText: 'Cancelar',
+      showLoaderOnConfirm: true,
+      preConfirm: (codigo) => {
+        if (!codigo || codigo.length !== 6) {
+          Swal.showValidationMessage('Por favor, insira um código válido de 6 dígitos');
+          return false;
+        }
+        
+        return new Promise((resolve, reject) => {
+          this.auth.validarCodigoRegistro({ email: email, codigo: codigo }).subscribe({
+            next: (res) => resolve(res),
+            error: (err) => {
+              Swal.showValidationMessage('Código incorreto ou expirado.');
+              resolve(false);
+            }
+          });
+        });
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed && result.value) {
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Sua conta foi ativada. Você já pode fazer login.',
+          icon: 'success'
+        }).then(() => {
+          this.router.navigate(['/login']);
+        });
+      }
+    });
   }
 }

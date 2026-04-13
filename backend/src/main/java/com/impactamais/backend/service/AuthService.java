@@ -74,6 +74,7 @@ public class AuthService {
         gerarEEnviarCodigo(email, TipoCodigo.RECUPERACAO_SENHA);
     }
 
+    @SuppressWarnings("null")
     public void redefinirSenha(String email, String codigoValidacao, String novaSenha) {
         CodigoVerificacao codigo = codigoRepository.findByEmailAndCodigoAndTipo(
                 email, codigoValidacao, TipoCodigo.RECUPERACAO_SENHA)
