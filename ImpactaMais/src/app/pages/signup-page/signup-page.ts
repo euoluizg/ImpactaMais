@@ -6,6 +6,7 @@ import { NavbarComponent } from '../../components/navbar-component/navbar-compon
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/AuthService';
 
 export function senhasIguaisValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -46,6 +47,8 @@ interface SignupFormModel {
 })
 export class SignupPage {
   router = inject(Router);
+  auth = inject(AuthService);
+
   signupForm! : FormGroup<SignupFormModel>;
 
   constructor() {
@@ -63,8 +66,22 @@ export class SignupPage {
 
   onSignUp() {
     if (this.signupForm.valid) {
-      // Lógica de cadastro aqui
-      console.log('Cadastro bem-sucedido!');
+      const { nome, email, senha } = this.signupForm.value;
+      const payload = { nome, email, senha };
+
+      console.log('Enviando dados para o Render...', payload);
+
+      this.auth.cadastrarUsuario(payload).subscribe({
+        next: (response) => {
+          console.log('✅ Cadastro salvo no banco de dados!', response);
+          alert('Cadastro realizado com sucesso! Verifique seu e-mail.');
+        },
+        error: (error) => {
+          // O Backend recusou (ex: e-mail já existe, erro de CORS, etc)
+          console.error('❌ Erro de comunicação com a API:', error);
+          alert('Houve um erro ao processar seu cadastro. Veja o console F12.');
+        }
+      });
     } else {
       console.log('Formulário inválido. Por favor, preencha corretamente.');
       this.signupForm.markAllAsTouched();
